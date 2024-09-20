@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
   </head>
   <body>
     <input type="text" value="" id="text-input" />
     <button py-click="run()" id="run-button">Run</button>
 
-    <py-config>
-        packages = ["transformers-js-py"]
-    </py-config>
+    <py-env>
+        - transformers-js-py
+    </py-env>
     <py-script>
         import asyncio
         from transformers_js_py import import_transformers_js
