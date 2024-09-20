@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  </head>
+  <body>
+    <input type="text" value="" id="text-input" />
+    <button py-click="run()" id="run-button">Run</button>
+
+    <py-config>
+        packages = ["transformers-js-py"]
+    </py-config>
+    <py-script>
+        import asyncio
+        from transformers_js_py import import_transformers_js
+
+        text_input = Element("text-input")
+
+        async def main(input_data):
+            transformers = await import_transformers_js()
+            pipeline = transformers.pipeline
+            pipe = await pipeline('sentiment-analysis')
+            out = await pipe(input_data)
+            print(out)
+
+        def run():
+            print("Start")
+            input_data = text_input.value
+            if input_data.strip() == "":
+                print("No data input.")
+                return
+
+            future = asyncio.ensure_future(main(input_data))
+    </py-script>
+  </body>
+</html>
